@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำถามสำคัญ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #fdd835, #ffab91); /* สีเหลืองไปส้ม */
+            overflow: hidden; /* ป้องกันไม่ให้เอฟเฟกต์ล้น */
+        }
+
+        .heart {
+            position: absolute;
+            background-color: #e91e63;
+            width: 20px;
+            height: 20px;
+            transform: rotate(45deg);
+            border-radius: 50%;
+            animation: fallingHeart 3s linear infinite;
+            opacity: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            background-color: #e91e63;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            width: 20px;
+            height: 20px;
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            width: 20px;
+            height: 20px;
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes fallingHeart {
+            0% {
+                transform: translate(0, -100vh) rotate(45deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(calc(20vw * var(--random)), 100vh) rotate(45deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .question-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #e91e63;
+            margin-bottom: 30px;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .button-container button {
+            padding: 15px 30px;
+            margin: 0 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .love-button {
+            background-color: #ff8a80;
+            color: white;
+        }
+
+        .not-love-button {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .love-button:hover {
+            background-color: #f44336;
+            transform: scale(1.05);
+        }
+
+        .not-love-button:hover {
+            background-color: #c62828;
+            transform: scale(1.05);
+        }
+
+        #angry-message {
+            color: #d32f2f;
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: bold;
+            display: none;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="question-container">
+        <h1>ที่รัก... รักเค้ามั้ย?</h1>
+        <div class="button-container">
+            <button class="love-button" onclick="goToSecondPage()">รัก</button>
+            <button class="not-love-button" onclick="showAngryMessage()">ไม่รัก</button>
+        </div>
+        <p id="angry-message">โกรธนะ! 😠</p>
+    </div>
+
+    <script>
+        function goToSecondPage() {
+            window.location.href = "second.html";
+        }
+
+        function showAngryMessage() {
+            document.getElementById("angry-message").style.display = "block";
+        }
+
+        // สร้างหัวใจที่ตกลงมา
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.setProperty('--random', Math.random());
+            document.body.appendChild(heart);
+        }
+
+        setInterval(createFallingHeart, 500); // สร้างหัวใจทุก 0.5 วินาที
+    </script>
+</body>
+</html>
