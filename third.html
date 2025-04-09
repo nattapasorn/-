@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สุขสันต์วันครบรอบ!</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #a5d6a7, #81c784); /* สีเขียวอ่อนไปเข้ม */
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #f44336;
+            animation: fallingConfetti 2s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes fallingConfetti {
+            0% {
+                transform: translate(0, -100vh) rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(calc(20vw * var(--random)), 100vh) rotate(720deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .anniversary-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: zoomIn 1s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            color: #388e3c;
+            font-size: 4em;
+            margin-bottom: 30px;
+            animation: tada 2s infinite;
+        }
+
+        @keyframes tada {
+            0% { transform: scale(1); }
+            10%, 20% { transform: scale(0.9) rotate(-3deg); }
+            30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+            40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        #countdown {
+            font-size: 26px;
+            margin-bottom: 40px;
+            color: #43a047;
+            animation: pulseColor 2s infinite alternate;
+        }
+
+        @keyframes pulseColor {
+            0% { color: #43a047; }
+            100% { color: #66bb6a; }
+        }
+
+        .next-button {
+            padding: 18px 35px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #81c784;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .next-button:hover {
+            background-color
