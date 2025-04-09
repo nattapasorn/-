@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใส่รหัสลับ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0); /* สีชมพูอ่อนไปเข้ม */
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: twinkle 2s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .code-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h2 {
+            color: #9c27b0;
+            margin-bottom: 30px;
+            animation: jiggle 1.5s infinite;
+        }
+
+        @keyframes jiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        #password-display {
+            font-size: 30px;
+            margin-bottom: 30px;
+            letter-spacing: 20px;
+        }
+
+        .number-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .number-pad button {
+            padding: 20px;
+            font-size: 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #fce4ec;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .number-pad button:active {
+            background-color: #f48fb1;
+            transform: scale(0.95);
+        }
+
+        #message {
+            font-size: 20px;
+            color: #9c27b0;
+            margin-top: 20px;
+        }
+
+        #error-message {
+            color: #d32f2f;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="code-container">
+        <h2>ใส่รหัสลับ</h2>
+        <div id="password-display"></div>
+        <div class="number-pad">
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="clearPassword()">C</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="checkPassword()">ตกลง</button>
+        </div>
+        <p id="message"></p>
+        <p id="error-message"></p>
+    </div>
+
+    <script>
+        let password = "";
+        const correctPassword = "1103";
+        const passwordDisplay = document.getElementById("password-display");
+        const messageElement = document.getElementById("message");
+        const errorMessageElement = document.getElementById("error-message");
+
+        function appendNumber(number) {
+            password += number;
+            passwordDisplay.textContent = "*".repeat(password.length);
+            errorMessageElement.textContent = "";
+        }
+
+        function clearPassword() {
+            password = "";
+            passwordDisplay.textContent = "";
+            errorMessageElement.textContent = "";
+        }
+
+        function checkPassword() {
+            if (password === correctPassword) {
+                window.location.href = "third.html";
+            } else {
+                errorMessageElement.textContent = "ผิดอีกรอบ เต้นง้อแฟนนะ! 😉";
+                password = "";
+                passwordDisplay.textContent = "";
+            }
+        }
+
+        // สร้างดาวที่กระพริบ
+        function createTwinklingStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            document.body.appendChild(star);
+        }
+
+        for (let i = 0; i < 50; i++) { // สร้างดาวจำนวนหนึ่ง
+            createTwinklingStar();
+        }
+    </script>
+</body>
+</html>
