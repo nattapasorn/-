@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อความพิเศษ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ffccbc, #ffab91); /* สีส้มอ่อนไปส้ม */
+            overflow: hidden;
+        }
+
+        .gift-box {
+            background-color: #fff;
+            border: 5px solid #ff7043;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: present 1s ease-in-out;
+        }
+
+        @keyframes present {
+            0% { transform: translateY(50px) scale(0.8); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        h2 {
+            color: #f57c00;
+            margin-bottom: 30px;
+            animation: bounce 1.2s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        .message-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff8a65;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #ffb74d; }
+            100% { box-shadow: 0 0 15px #ffb74d; }
+        }
+
+        .message-button:hover {
+            background-color: #f4511e;
+            transform: scale(1.05);
+        }
+
+        #displayed-message {
+            font-size: 22px;
+            color: #e65100;
+            font-weight: bold;
+            animation: revealText 1s ease-out;
+            opacity: 0;
+        }
+
+        @keyframes revealText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-box">
+        <h2>ข้อความพิเศษถึงบิบี๋</h2>
+        <button class="message-button" onclick="showMessage('คิดถึงมากๆ เลยนะคนดี ❤️')">ข้อความที่ 1</button>
+        <button class="message-button" onclick="showMessage('อยู่ด้วยกันไปนานๆ เลยนะ 🥰')">ข้อความที่ 2</button>
+        <button class="message-button" onclick="showMessage('เค้ารักตัวเองที่สุดในโลกเลย! 😘')">ข้อความที่ 3</button>
+        <div id="displayed-message"></div>
+    </div>
+
+    <script>
+        const messageDisplay = document.getElementById("displayed-message");
+
+        function showMessage(message) {
+            messageDisplay.textContent = message;
+            messageDisplay.style.opacity = 1; // ให้ข้อความปรากฏ
+        }
+    </script>
+</body>
+</html>
